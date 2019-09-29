@@ -25,8 +25,14 @@ const getData = api => {
     .catch(error => console.log(error));
 }
 
-const loadData = () => {
-  getData(API);
+const loadData = async () => {
+  try {
+    const nextFetch = localStorage.getItem('next_fetch');
+    const urlAPI = nextFetch != null ? nextFetch : API;
+    await getData(urlAPI);
+  } catch(error) {
+    console.log(error);
+  }
 }
 
 const intersectionObserver = new IntersectionObserver(entries => {
