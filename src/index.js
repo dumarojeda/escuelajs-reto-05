@@ -2,6 +2,8 @@ const $app = document.getElementById('app');
 const $observe = document.getElementById('observe');
 const API = 'https://rickandmortyapi.com/api/character/';
 
+window.localStorage.clear()
+
 const getData = api => {
   fetch(api)
     .then(response => response.json())
@@ -29,6 +31,9 @@ const loadData = async () => {
   try {
     const nextFetch = localStorage.getItem('next_fetch');
     const urlAPI = nextFetch != null ? nextFetch : API;
+    if (localStorage.getItem('next_fetch') == "") {
+      localStorage.removeItem('next_fetch');
+    }
     await getData(urlAPI);
   } catch(error) {
     console.log(error);
