@@ -33,6 +33,11 @@ const loadData = async () => {
     const urlAPI = nextFetch != null ? nextFetch : API;
     if (localStorage.getItem('next_fetch') == "") {
       localStorage.removeItem('next_fetch');
+      let messageItem = document.createElement('div');
+      messageItem.classList.add('Message');
+      messageItem.innerHTML = 'Ya no hay personajes...';
+      $app.appendChild(messageItem);
+      observe.remove()
     }
     await getData(urlAPI);
   } catch(error) {
